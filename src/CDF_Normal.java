@@ -24,11 +24,10 @@ C
 */
 
     public static double normp(double z) {
-
-        double zabs;
-        double p;
-        double expntl,pdf;
-
+	    //returns the probability of a z to the right of what is inputted
+        double zabs; //Absolute value of Z.  
+        double p; //Probability that gets returned
+        double expntl,pdf; // -.25 * (Z)^4
         final double p0 = 220.2068679123761;
         final double p1 = 221.2135961699311;
         final double p2 = 112.0792914978709;
@@ -36,7 +35,7 @@ C
         final double p4 = 6.373962203531650;
         final double p5 = .7003830644436881;
         final double p6 = .3526249659989109E-01;
-
+	    //probability coefficients
         final double q0 = 440.4137358247522;
         final double q1 = 793.8265125199484;
         final double q2 = 637.3336333788311;
@@ -45,14 +44,15 @@ C
         final double q5 = 16.06417757920695;
         final double q6 = 1.755667163182642;
         final double q7 = .8838834764831844E-1;
-
+	    //more probability coefficients
         final double cutoff = 7.071;
+	    //z score at which a different function must be used
         final double root2pi = 2.506628274631001;
-
+	    //the square root of pi, duh
         zabs = Math.abs(z);
 
 //  |z| > 37
-
+	    //Z scores too big or small just round
         if (z > 37.0) {
 
             p = 1.0;
@@ -74,7 +74,7 @@ C
         expntl = Math.exp(-.5*zabs*zabs);
 
         pdf = expntl/root2pi;
-
+	    //density function, used for finding the area under the curve
 //  |z| < cutoff = 10/sqrt(2).
 
         if (zabs < cutoff) {
